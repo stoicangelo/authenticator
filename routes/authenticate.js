@@ -58,6 +58,12 @@ router.post('/register', checkUnauthenticated, function(req, res) {
     })
 });
 
+router.get('/logout' , checkAuthenticated, function(req, res){
+    req.logout();
+    req.flash('success_msg', 'You are logged out');
+    res.redirect('/auth/login');
+});
+
 function checkUnauthenticated(req, res, next){
     if(req.isAuthenticated()){
         return redirect('/auth/login');
@@ -66,5 +72,14 @@ function checkUnauthenticated(req, res, next){
         next();
     }
 }
+
+function checkAuthenticated(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    else{
+        res.redirect('/auth/login');
+    }
+  }
 
 module.exports = router;
