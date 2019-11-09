@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    div
+        form(action="/auth/register", method="post")
+            label(for="name") Name
+            input#name(type="text", name="name")
+
+            label(for="") Username
+            input#username(type="text", name="username")
+
+            label(for="") Password
+            input#pwd(type="password", name="pwd")
+
+            button(type="submit") Submit
+
+        - if(userExists)
+            p user already exists with the same username. try with a different username
+
