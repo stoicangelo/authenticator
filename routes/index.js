@@ -11,6 +11,14 @@ router.get('/', checkAuthenticated, function(req, res, next) {
   res.render('index', { title: 'Home', name: req.user.name });
 });
 
+router.get('/products', checkAuthenticated, function(req, res, next) {
+  res.render('products', { title: 'Products'});
+});
+
+router.get('/services', checkAuthenticated, function(req, res, next) {
+  res.render('services', { title: 'Services'});
+});
+
 function checkAuthenticated(req, res, next){
   if(req.isAuthenticated()){
       return next();

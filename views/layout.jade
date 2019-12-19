@@ -2,9 +2,34 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet',href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u',crossorigin='anonymous')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa',crossorigin='anonymous')
     link(rel='stylesheet', href='/stylesheets/style.css')
+
   body
-    .header.container
-      if user
-        a(href='/auth/logout') Logout
+    nav.navbar.navbar-inverse
+      .container-fluid.header
+        .navbar-header
+          a.navbar-brand(href="/") MySite
+        ul.nav.navbar-nav
+          if user
+            li
+              a(href='/') Home
+          if user
+            li
+              a(href='/products') Products
+          if user
+            li
+              a(href='/services') Services
+          
+        ul.nav.navbar-nav.navbar-right
+          if user
+            li #[a(href='/auth/logout')  #[span.glyphicon.glyphicon-log-out] Logout]
+          if !user
+            li #[a(href='/auth/login')  #[span.glyphicon.glyphicon-log-in] Login]
+          if !user
+            li #[a(href='/auth/register') #[span.glyphicon.glyphicon-user] Sign Up]
+                
+          
     block content
+    

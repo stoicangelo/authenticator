@@ -6,3 +6,13 @@ body {
 a {
   color: #00B7FF;
 }
+
+.navbar {
+  color: #000000;
+  background-color: #631199;
+}
+
+.nav {
+  color : #FFFFFF;
+  font: 20px;
+}
