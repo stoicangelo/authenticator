@@ -1,15 +1,20 @@
 extends layout
 
 block content
-    div
-        form(action="/auth/login", method="post")
+    div.login-form
+        form.form-horizontal(action="/auth/login", method="post")
+            .form-group
+                label.control-label.col-md-3(for="username") Username
+                .col-md-3
+                    input#username.form-control(type="text", name="username", required) 
 
-            label(for="username") Username
-            input#username(type="text", name="username") 
+            .form-group
+                label.control-label.col-md-3(for="pwd") Password
+                .col-md-3
+                    input#pwd.form-control(type="password", name="password", required) 
 
-            label(for="pwd") Password
-            input#pwd(type="password", name="password") 
+            .form-group
+                .col-md-offset-3.col-md-3
+                    button(type="submit") Login
 
-            button(type="submit") Login
-
-        a(href="/auth/register", title="Register").class not a registered user? click here
+        a.col-md-offset-3(href="/auth/register", title="Register") not a registered user? click here

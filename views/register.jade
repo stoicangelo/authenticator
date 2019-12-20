@@ -1,19 +1,54 @@
 extends layout
 
 block content
-    div
-        form(action="/auth/register", method="post")
-            label(for="name") Name
-            input#name(type="text", name="name")
+    div.register-form
+        form.form-horizontal(action="/auth/register", method="post")
+            .form-group
+                label.control-label.col-md-3(for="name") Name
+                .col-md-3
+                    input#name.form-control(type="text", name="name", required)
 
-            label(for="") Username
-            input#username(type="text", name="username")
+            .form-group
+                label.control-label.col-md-3(for="username") Username
+                .col-md-3
+                    input#username.form-control(type="text", name="username", required)
 
-            label(for="") Password
-            input#pwd(type="password", name="pwd")
+            .form-group
+                label.control-label.col-md-3(for="pwd") Password
+                .col-md-3
+                    input#pwd.form-control(type="password", name="pwd", required)
 
-            button(type="submit") Submit
+            .form-group
+                label.control-label.col-md-3(for="confirm-pwd") Confirm Password
+                .col-md-3
+                    input#confirm-pwd.form-control(type="password", name="confirm-pwd", required)
+                b
+                    span#confirm-span(style="margin-top:10px;").col-md-2
 
-        - if(userExists)
-            p user already exists with the same username. try with a different username
+            .form-group
+                .col-md-offset-3
+                    button#register-btn(type="submit", disabled) Submit
 
+        a.col-md-offset-3(href="/auth/login", title="Login") already a member? click here to login
+
+    - if(userExists)
+        p.col-md-offset-2 user already exists with the same username. try with a different username
+
+    script.
+        
+        geti('confirm-pwd').addEventListener('keyup', function(e){
+            var pwdConfirmVal = geti('confirm-pwd').value;
+            var pwdVal = geti('pwd').value;
+            if(e.keyCode!=13 && pwdConfirmVal.length>0 && pwdVal.length>0){
+                if(pwdVal == pwdConfirmVal){
+                    geti('confirm-span').textContent = 'Correct!';
+                    geti('confirm-span').style['color'] = 'green';
+                    geti('register-btn').disabled = false;
+                }
+                else{
+                    geti('confirm-span').textContent = 'Passwords dont match';
+                    geti('confirm-span').style['color'] = 'red';
+                    geti('register-btn').disabled = true;
+                }
+            }
+        })
